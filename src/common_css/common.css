@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 281803 */
+  src: url('//at.alicdn.com/t/font_xxcjx3pqgomyrpb9.eot');
+  src: url('//at.alicdn.com/t/font_xxcjx3pqgomyrpb9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_xxcjx3pqgomyrpb9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_xxcjx3pqgomyrpb9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_xxcjx3pqgomyrpb9.svg#iconfont') format('svg');
+}
+.iconfont{font-family:"iconfont" !important;font-style:normal;display: inline-block;-webkit-font-smoothing: antialiased;-webkit-text-stroke-width: 0.2px;-moz-osx-font-smoothing: grayscale; }
+
+body{color:#333; font-family:"Helvetica Neue", Helvetica, Microsoft YaHei, Arial, sans-serif;line-height: normal;-webkit-text-size-adjust: 100% !important;-webkit-user-select: none;user-select: none;-webkit-font-smoothing: antialiased;}
+
+img { border:0 none;}
+input{outline: 0;}
+
+/*表现对齐和宽度-s*/
+.overh {overflow: hidden;}
+.db {display: block;}
+.dib {display: inline-block;}
+.rel {position: relative;}
+.abs {position: absolute;}
+.fl {float: left;}
+.tx-c {text-align: center;}
+.tx-r {text-align: right;}
+.w100 {width: 100%;}
+.h100 {height: 100%;}
+.w50 {width: 50%;}
+/*表现对齐和宽度-e*/
+
+/*color-s*/
+.wy_red{color: #d43c33;}
+.wy_b_red {background-color:#d43c33;}
+.c-white {color: white;}
+.c-6 {color: #666;}
+.c-9 {color: #999;}
+/*color-e*/
+
+/*flex-s*/
+.flex {display: flex;}
+.flex-1 {flex: 1;width: 0%;}
+.flex-vertical-middle {align-items:center;}
+.flex-ver {flex-direction: column;}
+/*flex-e*/
+
+/*padding margin-s*/
+.ma {margin: 0 auto;}
+.p10 {padding: .1333rem;}
+.p20 {padding: .2667rem;}
+.mt10 {margin-top: .1333rem;}
+.ml10 {margin-left: .1333rem;}
+.mr10 {margin-right: .1333rem;}
+.mb20 {margin-bottom:.2667rem; }
+/*padding margin-e*/
+
+/*fontsize-s*/
+[data-dpr="1"] > *{ font-size: 14px;}
+[data-dpr="2"] > *{ font-size: 28px;}
+[data-dpr="3"] > *{ font-size: 42px;}
+/** 字体一律用 class方式控制 **/
+[data-dpr="1"] .f10{ font-size: 10px !important;} [data-dpr="2"] .f10{ font-size: 20px !important;} [data-dpr="3"] .f10{ font-size: 30px !important;}
+[data-dpr="1"] .f12{ font-size: 12px !important;} [data-dpr="2"] .f12{ font-size: 24px !important;} [data-dpr="3"] .f12{ font-size: 36px !important;}
+[data-dpr="1"] .f13{ font-size: 13px !important;} [data-dpr="2"] .f13{ font-size: 26px !important;} [data-dpr="3"] .f13{ font-size: 39px !important;}
+[data-dpr="1"] .f14{ font-size: 14px !important;} [data-dpr="2"] .f14{ font-size: 28px !important;} [data-dpr="3"] .f14{ font-size: 42px !important;}
+[data-dpr="1"] .f15{ font-size: 15px !important;} [data-dpr="2"] .f14{ font-size: 30px !important;} [data-dpr="3"] .f14{ font-size: 45px !important;}
+[data-dpr="1"] .f16{ font-size: 16px !important;} [data-dpr="2"] .f16{ font-size: 32px !important;} [data-dpr="3"] .f16{ font-size: 48px !important;}
+[data-dpr="1"] .f18{ font-size: 18px !important;} [data-dpr="2"] .f18{ font-size: 36px !important;} [data-dpr="3"] .f18{ font-size: 54px !important;}
+[data-dpr="1"] .f20{ font-size: 20px !important;} [data-dpr="2"] .f20{ font-size: 40px !important;} [data-dpr="3"] .f20{ font-size: 60px !important;}
+[data-dpr="1"] .f22{ font-size: 22px !important;} [data-dpr="2"] .f22{ font-size: 44px !important;} [data-dpr="3"] .f22{ font-size: 66px !important;}
+[data-dpr="1"] .f24{ font-size: 24px !important;} [data-dpr="2"] .f24{ font-size: 48px !important;} [data-dpr="3"] .f24{ font-size: 72px !important;}
+[data-dpr="1"] .f26{ font-size: 26px !important;} [data-dpr="2"] .f26{ font-size: 52px !important;} [data-dpr="3"] .f26{ font-size: 78px !important;}
+[data-dpr="1"] .f30{ font-size: 30px !important;} [data-dpr="2"] .f30{ font-size: 60px !important;} [data-dpr="3"] .f30{ font-size: 90px !important;}
+[data-dpr="1"] .f36{ font-size: 36px !important;} [data-dpr="2"] .f36{ font-size: 72px !important;} [data-dpr="3"] .f36{ font-size: 108px !important;}
+[data-dpr="1"] .f40{ font-size: 40px !important;} [data-dpr="2"] .f40{ font-size: 80px !important;} [data-dpr="3"] .f40{ font-size: 120px !important;}
+[data-dpr="1"] .f50{ font-size: 50px !important;} [data-dpr="2"] .f50{ font-size: 100px !important;} [data-dpr="3"] .f50{ font-size: 150px !important;}
+[data-dpr="1"] .f60{ font-size: 60px !important;} [data-dpr="2"] .f60{ font-size: 120px !important;} [data-dpr="3"] .f60{ font-size: 180px !important;}
+[data-dpr="1"] .f64{ font-size: 64px !important;} [data-dpr="2"] .f64{ font-size: 126px !important;} [data-dpr="3"] .f64{ font-size: 192px !important;}
+/*fontsize-e*/
