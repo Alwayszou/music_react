@@ -1,40 +1,102 @@
 
 import React from 'react';
-import { Carousel } from 'antd';
-import { list } from '../api/'
-import axios from 'axios';
+import { Carousel } from 'antd'
+import axios from 'axios'
 require('../css/main.css')
 
 
 class AppComponent extends React.Component {
+	constructor(){
+		super();
+		this.state = {
+			show:false
+		}
+	}
+	setStateShow(obj){
+		this.setState(obj)
+	}
   	render() {
     	return (
     		<div>
-	    		<TopFixed/>
-	    		<Recommd/>
-	    		<SongSheet/>
+    			<TopFixed show={this.state.show} setStateShow={this.setStateShow.bind(this)}/>
+				{!this.state.show&&
+					<div>
+						<Recommd/>
+		    			<SongSheet/>
+		    		</div>
+				}	
     		</div>
     	);
   	}
 }
 
-function TopFixed(){
-	return(
-		<section className="topFixed">
-			<div id="search_title" className="wy_b_red">
-				<div className="flex flex-vertical-middle title_warp">
-					<i className="iconfont f26 c-white">&#xe64f;</i>
-					<div className="flex-1 index_search_warp flex">
-						<i className="iconfont f16" id="search_icon">&#xe600;</i>
-						<input type="search" id="index_search" placeholder="搜索音乐、歌词、电台" className="f12"/>
+class TopFixed extends React.Component {
+	showFalse(){
+		this.props.setStateShow({show:false});
+		this.refs.search.setkey();
+	}
+	render(){
+		return(
+			<section className="topFixed">
+				<div id="search_title" className="wy_b_red">
+					<div className="flex flex-vertical-middle title_warp">
+						<i className="iconfont f26 c-white">&#xe64f;</i>
+						<div className="flex-1 index_search_warp flex">
+							<i className="iconfont f16" id="search_icon">&#xe600;</i>
+							<Search  ref="search" {...this.props}/>
+						</div>
+						{!this.props.show&&
+							<i className="iconfont f26 c-white" >&#xe6ed;</i>
+						}
+						
+						{this.props.show&&
+							<span className="f22 c-white" onClick={this.showFalse.bind(this)}>取消</span>
+						}
 					</div>
-					<i className="iconfont f26 c-white" >&#xe6ed;</i>
-					<span className="f22 c-white">取消</span>
 				</div>
-			</div>
-			<Tabs/>
-		</section>
-	);
+				{!this.props.show&&
+					<Tabs/>
+				}
+			</section>
+		);
+	}
+}
+
+class Search extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			key:''
+		}
+	}
+	setkey(){
+		this.setState({key:''})
+	}
+	searchList(key){
+		if (!key||key==" ") return;
+		this.props.setStateShow({show:true});
+		let ops = {
+			params:{
+				type:'search',
+				s:key
+			}		
+		}
+		axios.get('https://api.imjad.cn/cloudmusic/',ops)
+			.then((res)=>{
+				if (res.data.code===200) {
+					
+				}
+			})
+	}
+	handleChange(event){
+		this.setState({key: event.target.value});
+		this.searchList(event.target.value);
+	}
+	render(){
+		return(
+			<input type="search" id="index_search" placeholder="搜索音乐、歌词、电台" className="f12" value={this.state.key} onInput={this.handleChange.bind(this)}/>
+		);
+	}
 }
 
 class Tabs extends React.Component{
