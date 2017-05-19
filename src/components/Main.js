@@ -2,6 +2,7 @@
 import React from 'react';
 import { Carousel } from 'antd'
 import axios from 'axios'
+import ReactPullToRefresh from 'react-pull-to-refresh'
 require('../css/main.css')
 
 
@@ -15,22 +16,39 @@ class AppComponent extends React.Component {
 	setStateShow(obj){
 		this.setState(obj)
 	}
+	handleRefresh(){
+
+	}
   	render() {
     	return (
     		<div>
     			<TopFixed show={this.state.show} setStateShow={this.setStateShow.bind(this)}/>
+    			<ReactPullToRefresh onRefresh={this.handleRefresh}>
 				{!this.state.show&&
 					<div>
 						<Recommd/>
 		    			<SongSheet/>
 		    		</div>
-				}	
+				}
+				</ReactPullToRefresh>	
     		</div>
     	);
   	}
 }
 
 class TopFixed extends React.Component {
+	constructor(){
+		super();
+		this.state = {
+			list:{
+				searchList:[],
+				singerArr:[]
+			}
+		}
+	}
+	setSearchList(obj){
+		this.setState({list:obj})
+	}
 	showFalse(){
 		this.props.setStateShow({show:false});
 		this.refs.search.setkey();
@@ -43,7 +61,7 @@ class TopFixed extends React.Component {
 						<i className="iconfont f26 c-white">&#xe64f;</i>
 						<div className="flex-1 index_search_warp flex">
 							<i className="iconfont f16" id="search_icon">&#xe600;</i>
-							<Search  ref="search" {...this.props}/>
+							<Search  ref="search" {...this.props} setSearchList={this.setSearchList.bind(this)}/>
 						</div>
 						{!this.props.show&&
 							<i className="iconfont f26 c-white" >&#xe6ed;</i>
@@ -57,23 +75,30 @@ class TopFixed extends React.Component {
 				{!this.props.show&&
 					<Tabs/>
 				}
+				{this.props.show&&
+					<SearchResult list={this.state.list} />
+				}			
 			</section>
 		);
 	}
 }
 
-class Search extends React.Component{
+class Search extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			key:''
+			key:'',
+			searchList:[],
+			singer:[]
 		}
 	}
 	setkey(){
 		this.setState({key:''})
 	}
 	searchList(key){
-		if (!key||key==" ") return;
+		if (!key||key==" "){
+			return;
+		} 
 		this.props.setStateShow({show:true});
 		let ops = {
 			params:{
@@ -84,7 +109,16 @@ class Search extends React.Component{
 		axios.get('https://api.imjad.cn/cloudmusic/',ops)
 			.then((res)=>{
 				if (res.data.code===200) {
-					
+					let singerArr = [];
+					for(let i in res.data.result.songs){
+						let name = '';
+						for(let index in res.data.result.songs[i].ar){
+							name = name + res.data.result.songs[i].ar[index].name + '/';
+							name = name.substring(0,name.length-1)
+						}
+						singerArr.push(name);
+					}
+					this.props.setSearchList({searchList:res.data.result.songs,singer:singerArr});
 				}
 			})
 	}
@@ -95,6 +129,26 @@ class Search extends React.Component{
 	render(){
 		return(
 			<input type="search" id="index_search" placeholder="搜索音乐、歌词、电台" className="f12" value={this.state.key} onInput={this.handleChange.bind(this)}/>
+		);
+	}
+}
+
+class SearchResult extends React.Component {
+	render(){
+		let res = this.props.list;
+		let resultItems = res.searchList.map((v,i) =>
+			<div className="flex flex-vertical-middle songItem" key={i}>
+		    	<div className="songIndex f18">{i+1}</div>
+				<div className="flex-1 itemBorder">
+					<div className="f18">{v.name}</div>
+					<div className="c-6 singInfo">{ res.singer[i] }-{v.al.name}</div>
+				</div>
+		    </div>
+		  );
+		return(
+			<section id="search">
+				{resultItems}
+			</section>
 		);
 	}
 }
@@ -184,13 +238,19 @@ class SongSheet extends React.Component{
 		axios.get('http://musicapi.duapp.com/api.php',ops)
 			.then((res)=>{
 				if (res.data.code===200) {
+					let list =res.data.playlists;
+					for(let i in list){
+						if (list[i].playCount>=10000) {
+							list[i].playCount = parseInt(list[i].playCount/10000)+'万';
+						}
+					}
 					this.setState({sheetList:res.data.playlists});
 				}
 			})
 	}
 	render() {
 		let list = this.state.sheetList;
-		let listItems = list.map((v) =>
+		let listItems = list.map((v,index) =>
 			<div className="single_sheet" key={v.id}>
 		    	<div className="playCount">{v.playCount}</div>
 				<img src={v.coverImgUrl+'?param=230y230'}/>

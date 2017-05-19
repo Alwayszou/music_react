@@ -19,7 +19,6 @@
 .tabs_active_border{position: absolute;bottom:-2px;left:0;transition: transform 300ms;-webkit-transition: -webkit-transform 300ms;}
 .tabs_active_border:after{content:"";display:block;width:60%;height:2px;margin:0 auto;background-color: #DD2727;}
 .topFixed {position: fixed;top: 0;left: 0;z-index: 99;width: 100%;}
-#search {margin-top: 1.5rem;}
 .songIndex {width: 1.5rem;text-align: center;}
 .songItem {padding: .3rem .5rem 0 0;line-height: .6667rem;}
 .itemBorder {border-bottom: 1px solid #eee;}
