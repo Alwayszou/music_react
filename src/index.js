@@ -1,12 +1,33 @@
 import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/Main';
+import { BrowserRouter, Route } from 'react-router-dom'
+import App from './components/Main'
+import List from './components/List'
 import 'antd/dist/antd.css';
 require('./common_css/common.css');
 
 // Render the main component into the dom
-ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.render(<App />, document.getElementById('app'));
+class main extends React.Component {
+	render(){
+		return(
+			<div>
+				<div>{ this.props.children }</div>
+			</div>
+		);
+	}
+}
+
+ReactDOM.render((
+  	<BrowserRouter>
+  		<div>
+			<Route path="/" component={main}/>
+			<Route path="/App" component={App} />
+	    	<Route path="/List" component={List}/>
+	    </div>
+    </BrowserRouter>
+), document.getElementById('app'))
 
 //flexble
 if(/qiakr_wv/i.test(navigator.userAgent)){

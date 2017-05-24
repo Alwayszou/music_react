@@ -1,7 +1,10 @@
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Carousel } from 'antd'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
+import List from './List.js'
 import ReactPullToRefresh from 'react-pull-to-refresh'
 require('../css/main.css')
 
@@ -10,19 +13,23 @@ class AppComponent extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			show:false
+			show:false,
+			refresh:false
 		}
 	}
 	setStateShow(obj){
 		this.setState(obj)
 	}
 	handleRefresh(){
-
+		
 	}
   	render() {
     	return (
     		<div>
     			<TopFixed show={this.state.show} setStateShow={this.setStateShow.bind(this)}/>
+    			{this.state.refresh
+
+    			}
     			<ReactPullToRefresh onRefresh={this.handleRefresh}>
 				{!this.state.show&&
 					<div>
@@ -192,11 +199,6 @@ function Recommd(){
 	)
 }
 
-// function LoadMore() {
-// 	return(
-
-// 	)
-// }
 
 function Slider(){
 	return(
@@ -251,11 +253,11 @@ class SongSheet extends React.Component{
 	render() {
 		let list = this.state.sheetList;
 		let listItems = list.map((v,index) =>
-			<div className="single_sheet" key={v.id}>
+			<Link to={{pathname:'/List',state:{id:v.id,url:v.coverImgUrl}}} className="single_sheet" key={v.id}>
 		    	<div className="playCount">{v.playCount}</div>
 				<img src={v.coverImgUrl+'?param=230y230'}/>
 				<span className="sheet_name">{v.name}</span>
-		    </div>
+		    </Link>
 		  );
 		return(
 			<div>

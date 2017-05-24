@@ -1,0 +1,13 @@
+#sheetBg {background-size: cover;background-repeat: no-repeat;height: 4rem; filter: blur(50px);background-position: center;}
+#mask {position: absolute;top: 0;bottom: 0;left: 0;
+z-index: 3;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.8);opacity: .3;height: 4rem;}
+#sheetInfo {padding: .4667rem;position: absolute;top: 0;width: 100%;box-sizing: border-box;z-index: 99;}
+.sheetImg {width: 3rem;margin-right: .2667rem;}
+.avatarUrl {width: 1rem;border-radius: 100%;margin-right: .2667rem;}
+#songList {padding: .4667rem 0;}
+#listTitle {border-bottom: 1px solid #eee;}
+.songIndex {width: 1.5rem;text-align: center;}
+.songItem {padding: .3rem .5rem 0 0;line-height: .6667rem;}
+.itemBorder {border-bottom: 1px solid #eee;}
+.titleText {padding: .5rem 0;}
+.singInfo {padding: .0677rem 0;overflow: hidden;text-overflow:ellipsis;-webkit-line-clamp:1;    display: -webkit-box;-webkit-box-orient: vertical;}
