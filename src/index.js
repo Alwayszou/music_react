@@ -5,7 +5,13 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import App from './components/Main'
 import List from './components/List'
 import 'antd/dist/antd.css';
-require('./common_css/common.css');
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './reducers'
+import PropTypes from 'prop-types'
+require('./common_css/common.css')
+
+const store = createStore(reducer);
 
 // Render the main component into the dom
 // ReactDOM.render(<App />, document.getElementById('app'));
@@ -20,13 +26,15 @@ class main extends React.Component {
 }
 
 ReactDOM.render((
-  	<BrowserRouter>
-  		<div>
-			<Route path="/" component={main}/>
-			<Route path="/App" component={App} />
-	    	<Route path="/List" component={List}/>
-	    </div>
-    </BrowserRouter>
+	<Provider store={store}>
+	  	<BrowserRouter>
+	  		<div>
+				<Route path="/" component={main}/>
+				<Route path="/App" component={App} />
+		    	<Route path="/List" component={List}/>
+		    </div>
+	    </BrowserRouter>
+	</Provider>
 ), document.getElementById('app'))
 
 //flexble

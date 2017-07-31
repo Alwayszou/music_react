@@ -1,10 +1,8 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Carousel } from 'antd'
+import Carousel  from 'antd/lib/carousel'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import List from './List.js'
 import ReactPullToRefresh from 'react-pull-to-refresh'
 require('../css/main.css')
 
@@ -37,7 +35,7 @@ class AppComponent extends React.Component {
 		    			<SongSheet/>
 		    		</div>
 				}
-				</ReactPullToRefresh>	
+				</ReactPullToRefresh>
     		</div>
     	);
   	}
@@ -84,7 +82,7 @@ class TopFixed extends React.Component {
 				}
 				{this.props.show&&
 					<SearchResult list={this.state.list} />
-				}			
+				}
 			</section>
 		);
 	}
@@ -103,15 +101,15 @@ class Search extends React.Component {
 		this.setState({key:''})
 	}
 	searchList(key){
-		if (!key||key==" "){
+		if (!key||key==' '){
 			return;
-		} 
+		}
 		this.props.setStateShow({show:true});
 		let ops = {
 			params:{
 				type:'search',
 				s:key
-			}		
+			}
 		}
 		axios.get('https://api.imjad.cn/cloudmusic/',ops)
 			.then((res)=>{
@@ -199,7 +197,6 @@ function Recommd(){
 	)
 }
 
-
 function Slider(){
 	return(
 		<Carousel autoplay>
@@ -236,7 +233,7 @@ class SongSheet extends React.Component{
 				type: 'topPlayList',
 				limit:'6'
 			}
-		}					
+		}
 		axios.get('http://musicapi.duapp.com/api.php',ops)
 			.then((res)=>{
 				if (res.data.code===200) {
@@ -252,7 +249,7 @@ class SongSheet extends React.Component{
 	}
 	render() {
 		let list = this.state.sheetList;
-		let listItems = list.map((v,index) =>
+		let listItems = list.map((v) =>
 			<Link to={{pathname:'/List',state:{id:v.id,url:v.coverImgUrl}}} className="single_sheet" key={v.id}>
 		    	<div className="playCount">{v.playCount}</div>
 				<img src={v.coverImgUrl+'?param=230y230'}/>
@@ -263,7 +260,7 @@ class SongSheet extends React.Component{
 			<div>
 				<ModuleTitle name="推荐歌单"/>
 				<div id="sheet" className="overh">
-					{listItems}			
+					{listItems}
 				</div>
 			</div>
 		);
