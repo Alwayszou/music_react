@@ -51,7 +51,7 @@ class TopFixed extends React.Component {
 			}
 		}
 	}
-	setSearchList(obj){
+	setSearchList = (obj) => {
 		this.setState({list:obj})
 	}
 	showFalse(){
@@ -66,7 +66,7 @@ class TopFixed extends React.Component {
 						<i className="iconfont f26 c-white">&#xe64f;</i>
 						<div className="flex-1 index_search_warp flex">
 							<i className="iconfont f16" id="search_icon">&#xe600;</i>
-							<Search  ref="search" {...this.props} setSearchList={this.setSearchList.bind(this)}/>
+							<Search  ref="search" {...this.props} setSearchList={this.setSearchList}/>
 						</div>
 						{!this.props.show&&
 							<i className="iconfont f26 c-white" >&#xe6ed;</i>
